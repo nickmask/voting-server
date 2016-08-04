@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { List, Map } from 'immuntable'
+import { List, Map } from 'immutable'
 
 describe('immuntibility', () => {
 
@@ -40,19 +40,19 @@ describe('immuntibility', () => {
     })
   })
 
-  describe('A tree', () => {
+  describe('a tree', () => {
 
     function addMovie(currentState, movie) {
-      return currentState.get(
+      return currentState.set(
         'movies',
         currentState.get('movies').push(movie)
-      )
+      );
     }
 
     it('is immutable', () => {
       let state = Map({
         movies: List.of('Trainspotting', '28 Days Later')
-      })
+      });
       let nextState = addMovie(state, 'Sunshine')
 
       expect(nextState).to.equal(Map({
@@ -62,13 +62,14 @@ describe('immuntibility', () => {
           'Sunshine'
         )
       }))
-      expect(state.to.equal(Map({
+      expect(state).to.equal(Map({
         movies: List.of(
           'Trainspotting',
           '28 Days Later'
         )
-      })))
+      }))
     })
+
   })
 
 })
